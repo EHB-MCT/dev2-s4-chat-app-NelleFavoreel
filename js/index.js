@@ -11,7 +11,20 @@ const chat = {
 			.then((response) => response.json())
 			.then(function (data) {
 				console.log(data);
-				document.querySelector("#messageContainer").innerHTML = data[0].message;
+				data.forEach(function (data) {
+					const htmlMessage = `
+                    <div class="messageItem">
+                      <div class="header">
+                          <span class="author">${data.author}</span>
+                          <span class="time">${data.created_at}</span>
+                      </div>
+                      <p>
+                          Hi there, this is the example
+                          ${data.message}
+                      </p>
+                  </div>`;
+					document.querySelector("#messageContainer").insertAdjacentHTML("beforeend", htmlMessage);
+				});
 			});
 	},
 	renderMessage(message) {},
